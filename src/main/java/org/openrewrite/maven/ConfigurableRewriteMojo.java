@@ -15,7 +15,7 @@ public abstract class ConfigurableRewriteMojo extends AbstractMojo {
     String configLocation;
 
     @Parameter(property = "activeRecipes")
-    private List<String> activeRecipes = Collections.emptyList();
+    private /*~~>*/List<String> activeRecipes = Collections.emptyList();
 
     @Nullable
     @Parameter(property = "rewrite.activeRecipes")

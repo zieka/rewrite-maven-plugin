@@ -104,7 +104,7 @@ public abstract class AbstractRewriteMojo extends ConfigurableRewriteMojo {
         }
 
         if (!baseFolders.isEmpty()) {
-            List<Path> sortedPaths = new ArrayList<>(new ArrayList<>(baseFolders));
+            /*~~>*/List<Path> sortedPaths = new ArrayList<>(new ArrayList<>(baseFolders));
             Collections.sort(sortedPaths);
             return sortedPaths.get(0);
         } else {
@@ -142,7 +142,7 @@ public abstract class AbstractRewriteMojo extends ConfigurableRewriteMojo {
 
             Environment env = environment();
 
-            List<NamedStyles> styles;
+            /*~~>*/List<NamedStyles> styles;
             styles = env.activateStyles(getActiveStyles());
             try {
                 Plugin checkstylePlugin = project.getPlugin("org.apache.maven.plugins:maven-checkstyle-plugin");
@@ -182,7 +182,7 @@ public abstract class AbstractRewriteMojo extends ConfigurableRewriteMojo {
 
             getLog().info("Validating active recipes...");
             Collection<Validated> validated = recipe.validateAll();
-            List<Validated.Invalid> failedValidations = validated.stream().map(Validated::failures)
+            /*~~>*/List<Validated.Invalid> failedValidations = validated.stream().map(Validated::failures)
                     .flatMap(Collection::stream).collect(toList());
             if (!failedValidations.isEmpty()) {
                 failedValidations.forEach(failedValidation -> getLog().error(
@@ -199,7 +199,7 @@ public abstract class AbstractRewriteMojo extends ConfigurableRewriteMojo {
             //Parse and collect source files from each project in the maven session.
             MavenMojoProjectParser projectParser = new MavenMojoProjectParser(getLog(), baseDir, pomCacheEnabled, pomCacheDirectory, runtime, skipMavenParsing, getExclusions(), sizeThresholdMb, mavenSession, settingsDecrypter);
 
-            List<SourceFile> sourceFiles = new ArrayList<>();
+            /*~~>*/List<SourceFile> sourceFiles = new ArrayList<>();
             if (runPerSubmodule) {
                 //If running per submodule, parse the source files for only the current project.
                 projectParser.resetTypeCache();
@@ -212,7 +212,7 @@ public abstract class AbstractRewriteMojo extends ConfigurableRewriteMojo {
             }
 
             getLog().info("Running recipe(s)...");
-            List<Result> results = recipe.run(sourceFiles, ctx).stream()
+            /*~~>*/List<Result> results = recipe.run(sourceFiles, ctx).stream()
                     .filter(source -> {
                         // Remove ASTs originating from generated files
                         if (source.getBefore() != null) {
@@ -256,10 +256,10 @@ public abstract class AbstractRewriteMojo extends ConfigurableRewriteMojo {
 
     public static class ResultsContainer {
         final Path projectRoot;
-        final List<Result> generated = new ArrayList<>();
-        final List<Result> deleted = new ArrayList<>();
-        final List<Result> moved = new ArrayList<>();
-        final List<Result> refactoredInPlace = new ArrayList<>();
+        final /*~~>*/List<Result> generated = new ArrayList<>();
+        final /*~~>*/List<Result> deleted = new ArrayList<>();
+        final /*~~>*/List<Result> moved = new ArrayList<>();
+        final /*~~>*/List<Result> refactoredInPlace = new ArrayList<>();
 
         public ResultsContainer(Path projectRoot, Collection<Result> results) {
             this.projectRoot = projectRoot;

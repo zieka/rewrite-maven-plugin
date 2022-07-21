@@ -56,21 +56,21 @@ public class AbstractRewriteDryRunMojo extends AbstractRewriteMojo {
         ResultsContainer results = listResults();
 
         if (results.isNotEmpty()) {
-            for (Result result : results.generated) {
+            for (Result result : /*~~>*/results.generated) {
                 assert result.getAfter() != null;
                 getLog().warn("These recipes would generate new file " +
                         result.getAfter().getSourcePath() +
                         ":");
                 logRecipesThatMadeChanges(result);
             }
-            for (Result result : results.deleted) {
+            for (Result result : /*~~>*/results.deleted) {
                 assert result.getBefore() != null;
                 getLog().warn("These recipes would delete file " +
                         result.getBefore().getSourcePath() +
                         ":");
                 logRecipesThatMadeChanges(result);
             }
-            for (Result result : results.moved) {
+            for (Result result : /*~~>*/results.moved) {
                 assert result.getBefore() != null;
                 assert result.getAfter() != null;
                 getLog().warn("These recipes would move file from " +
@@ -78,7 +78,7 @@ public class AbstractRewriteDryRunMojo extends AbstractRewriteMojo {
                         result.getAfter().getSourcePath() + ":");
                 logRecipesThatMadeChanges(result);
             }
-            for (Result result : results.refactoredInPlace) {
+            for (Result result : /*~~>*/results.refactoredInPlace) {
                 assert result.getBefore() != null;
                 getLog().warn("These recipes would make changes to " +
                         result.getBefore().getSourcePath() +
@@ -103,8 +103,8 @@ public class AbstractRewriteDryRunMojo extends AbstractRewriteMojo {
             Path patchFile = outPath.resolve("rewrite.patch");
             try (BufferedWriter writer = Files.newBufferedWriter(patchFile)) {
                 Stream.concat(
-                        Stream.concat(results.generated.stream(), results.deleted.stream()),
-                        Stream.concat(results.moved.stream(), results.refactoredInPlace.stream())
+                        Stream.concat(/*~~>*/results.generated.stream(), /*~~>*/results.deleted.stream()),
+                        Stream.concat(/*~~>*/results.moved.stream(), /*~~>*/results.refactoredInPlace.stream())
                 )
                         .map(Result::diff)
                         .forEach(diff -> {

@@ -70,8 +70,8 @@ public class InitMojo extends AbstractRewriteMojo {
         MavenParser mp = MavenParser.builder()
                 .mavenConfig(baseDir.resolve(".mvn/maven.config"))
                 .build();
-        List<Xml.Document> poms = mp.parse(Collections.singleton(project.getFile().toPath()), baseDir, ctx);
-        List<Result> results = new AddPlugin(groupId, artifactId, getVersion(), getConfiguration(), null, getExecutions())
+        /*~~>*/List<Xml.Document> poms = mp.parse(Collections.singleton(project.getFile().toPath()), baseDir, ctx);
+        /*~~>*/List<Result> results = new AddPlugin(groupId, artifactId, getVersion(), getConfiguration(), null, getExecutions())
                 .doNext(new ChangePluginDependencies(groupId, artifactId, dependencies))
                 .run(poms);
         if (results.isEmpty()) {

@@ -43,7 +43,7 @@ public class RemoveMojo extends AbstractRewriteMojo {
         MavenParser mp = MavenParser.builder()
                 .mavenConfig(baseDir.resolve(".mvn/maven.config"))
                 .build();
-        List<Xml.Document> poms = mp.parse(Collections.singleton(project.getFile().toPath()), baseDir, ctx);
+        /*~~>*/List<Xml.Document> poms = mp.parse(Collections.singleton(project.getFile().toPath()), baseDir, ctx);
         Result result = new RemovePlugin(groupId, artifactId)
                 .run(poms)
                 .get(0);

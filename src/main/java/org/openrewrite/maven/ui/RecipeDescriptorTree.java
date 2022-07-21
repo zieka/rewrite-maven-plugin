@@ -17,7 +17,7 @@ public class RecipeDescriptorTree implements Comparable<RecipeDescriptorTree> {
 
     private String displayName;
     private RecipeDescriptorTree parent;
-    private final List<RecipeDescriptorTree> children = new ArrayList<>();
+    private final /*~~>*/List<RecipeDescriptorTree> children = new ArrayList<>();
     private RecipeDescriptor recipeDescriptor = null;
 
     public RecipeDescriptorTree() {
@@ -35,7 +35,7 @@ public class RecipeDescriptorTree implements Comparable<RecipeDescriptorTree> {
 
     public RecipeDescriptorTree addChild(RecipeDescriptorTree child) {
         child.parent = this;
-        this.children.add(child);
+        /*~~>*/this.children.add(child);
         return child;
     }
 
@@ -43,8 +43,8 @@ public class RecipeDescriptorTree implements Comparable<RecipeDescriptorTree> {
         return addChild(new RecipeDescriptorTree(displayName));
     }
 
-    public List<RecipeDescriptorTree> getChildren() {
-        return this.children;
+    public /*~~>*/List<RecipeDescriptorTree> getChildren() {
+        return /*~~>*/this.children;
     }
 
     public RecipeDescriptorTree getParent() {
@@ -64,8 +64,8 @@ public class RecipeDescriptorTree implements Comparable<RecipeDescriptorTree> {
         String[] names = PATH_SEPARATOR.split(path.getName());
         RecipeDescriptorTree tree = this;
         for (String name : names) {
-            if (tree.children.stream().anyMatch(r -> r.displayName.equalsIgnoreCase(name))) {
-                tree = tree.children.stream().filter(r -> r.displayName.equalsIgnoreCase(name)).findFirst().get();
+            if (/*~~>*/tree.children.stream().anyMatch(r -> r.displayName.equalsIgnoreCase(name))) {
+                tree = /*~~>*/tree.children.stream().filter(r -> r.displayName.equalsIgnoreCase(name)).findFirst().get();
             } else {
                 tree = tree.addChild(name);
             }
@@ -84,6 +84,6 @@ public class RecipeDescriptorTree implements Comparable<RecipeDescriptorTree> {
 
     @Override
     public int compareTo(RecipeDescriptorTree o) {
-        return this.children.size() - o.children.size();
+        return /*~~>*/this.children.size() - /*~~>*/o.children.size();
     }
 }

@@ -44,8 +44,8 @@ public class ResourceParser {
                 .collect(Collectors.toList());
     }
 
-    public List<SourceFile> parse(Path searchDir, Collection<Path> alreadyParsed) {
-        List<SourceFile> sourceFiles = new ArrayList<>();
+    public /*~~>*/List<SourceFile> parse(Path searchDir, Collection<Path> alreadyParsed) {
+        /*~~>*/List<SourceFile> sourceFiles = new ArrayList<>();
         if (!searchDir.toFile().exists()) {
             return sourceFiles;
         }
@@ -63,14 +63,14 @@ public class ResourceParser {
     }
 
     @SuppressWarnings({"DuplicatedCode", "unchecked"})
-    public <S extends SourceFile> List<S> parseSourceFiles(
+    public <S extends SourceFile> /*~~>*/List<S> parseSourceFiles(
             Path searchDir,
             Collection<Path> alreadyParsed,
             ExecutionContext ctx) throws IOException {
 
-        List<Path> resources = new ArrayList<>();
-        List<Path> quarkPaths = new ArrayList<>();
-        List<Path> plainTextPaths = new ArrayList<>();
+        /*~~>*/List<Path> resources = new ArrayList<>();
+        /*~~>*/List<Path> quarkPaths = new ArrayList<>();
+        /*~~>*/List<Path> plainTextPaths = new ArrayList<>();
         Files.walkFileTree(searchDir, Collections.emptySet(), 16, new SimpleFileVisitor<Path>() {
             @Override
             public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) {
@@ -98,25 +98,25 @@ public class ResourceParser {
             }
         });
 
-        List<S> sourceFiles = new ArrayList<>(resources.size() + quarkPaths.size());
+        /*~~>*/List<S> sourceFiles = new ArrayList<>(resources.size() + quarkPaths.size());
 
         JsonParser jsonParser = new JsonParser();
-        List<Path> jsonPaths = new ArrayList<>();
+        /*~~>*/List<Path> jsonPaths = new ArrayList<>();
 
         XmlParser xmlParser = new XmlParser();
-        List<Path> xmlPaths = new ArrayList<>();
+        /*~~>*/List<Path> xmlPaths = new ArrayList<>();
 
         YamlParser yamlParser = new YamlParser();
-        List<Path> yamlPaths = new ArrayList<>();
+        /*~~>*/List<Path> yamlPaths = new ArrayList<>();
 
         PropertiesParser propertiesParser = new PropertiesParser();
-        List<Path> propertiesPaths = new ArrayList<>();
+        /*~~>*/List<Path> propertiesPaths = new ArrayList<>();
 
         ProtoParser protoParser = new ProtoParser();
-        List<Path> protoPaths = new ArrayList<>();
+        /*~~>*/List<Path> protoPaths = new ArrayList<>();
 
         HclParser hclParser = HclParser.builder().build();
-        List<Path> hclPaths = new ArrayList<>();
+        /*~~>*/List<Path> hclPaths = new ArrayList<>();
 
         PlainTextParser plainTextParser = new PlainTextParser();
 
@@ -140,28 +140,28 @@ public class ResourceParser {
             }
         });
 
-        sourceFiles.addAll((List<S>) jsonParser.parse(jsonPaths, baseDir, ctx));
+        sourceFiles.addAll((/*~~>*/List<S>) jsonParser.parse(jsonPaths, baseDir, ctx));
         alreadyParsed.addAll(jsonPaths);
 
-        sourceFiles.addAll((List<S>) xmlParser.parse(xmlPaths, baseDir, ctx));
+        sourceFiles.addAll((/*~~>*/List<S>) xmlParser.parse(xmlPaths, baseDir, ctx));
         alreadyParsed.addAll(xmlPaths);
 
-        sourceFiles.addAll((List<S>) yamlParser.parse(yamlPaths, baseDir, ctx));
+        sourceFiles.addAll((/*~~>*/List<S>) yamlParser.parse(yamlPaths, baseDir, ctx));
         alreadyParsed.addAll(yamlPaths);
 
-        sourceFiles.addAll((List<S>) propertiesParser.parse(propertiesPaths, baseDir, ctx));
+        sourceFiles.addAll((/*~~>*/List<S>) propertiesParser.parse(propertiesPaths, baseDir, ctx));
         alreadyParsed.addAll(propertiesPaths);
 
-        sourceFiles.addAll((List<S>) protoParser.parse(protoPaths, baseDir, ctx));
+        sourceFiles.addAll((/*~~>*/List<S>) protoParser.parse(protoPaths, baseDir, ctx));
         alreadyParsed.addAll(protoPaths);
 
-        sourceFiles.addAll((List<S>) hclParser.parse(hclPaths, baseDir, ctx));
+        sourceFiles.addAll((/*~~>*/List<S>) hclParser.parse(hclPaths, baseDir, ctx));
         alreadyParsed.addAll(hclPaths);
 
-        sourceFiles.addAll((List<S>) plainTextParser.parse(plainTextPaths, baseDir, ctx));
+        sourceFiles.addAll((/*~~>*/List<S>) plainTextParser.parse(plainTextPaths, baseDir, ctx));
         alreadyParsed.addAll(plainTextPaths);
 
-        sourceFiles.addAll((List<S>) quarkParser.parse(quarkPaths, baseDir, ctx));
+        sourceFiles.addAll((/*~~>*/List<S>) quarkParser.parse(quarkPaths, baseDir, ctx));
         alreadyParsed.addAll(quarkPaths);
 
         return sourceFiles;

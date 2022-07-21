@@ -22,12 +22,12 @@ public class ArtifactResolver {
 
     private final ArtifactRepository localRepository;
 
-    private final List<ArtifactRepository> remoteRepositories;
+    private final /*~~>*/List<ArtifactRepository> remoteRepositories;
 
     public ArtifactResolver(RepositorySystem repositorySystem, MavenSession session) {
         this.repositorySystem = repositorySystem;
         this.localRepository = session.getLocalRepository();
-        this.remoteRepositories = session.getCurrentProject().getRemoteArtifactRepositories();
+        /*~~>*/this.remoteRepositories = session.getCurrentProject().getRemoteArtifactRepositories();
     }
 
     public Artifact createArtifact(String coordinates) throws MojoExecutionException {
